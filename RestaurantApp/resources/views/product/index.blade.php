@@ -129,15 +129,15 @@
 
             <!-- Grille des Pizzas -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-y-auto custom-scrollbar pr-2 flex-1">
-                @foreach ($products as $item)
-                    <!-- Élément de pizza 1 -->
-                <div class="bg-white rounded-2xl shadow-md p-4 flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200 cursor-pointer">
-                    <img src="https://placehold.co/150x150/f0f0f0/666666?text=Pizza" alt="Pizza American Favorite" class="w-40 h-40 rounded-full object-cover mb-3 shadow-sm">
-                    <h3 class="text-lg font-semibold">{{$item->name }}</h3>
-                    <p class="text-blue-600 font-bold text-xl">{{$item->price }}</p>
-                    <p class="text-gray-500 text-sm">18 Pan Available</p>
-                </div>
-                @endforeach
+
+                @forelse ($products as $item)
+                    <div class="bg-white rounded-2xl shadow-md p-4 flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200 cursor-pointer">
+                     <x-product-card :product="$item" />
+                    </div>
+                @empty
+                    Pas de produit.
+                @endforelse
+              
                 
                 
             </div>
