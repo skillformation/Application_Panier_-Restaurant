@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categorie;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CategoryController;
 
-class CategorieController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+          //Recuperer tous les produits
+        $categories = Category::all();
+        return view('category.index', compact('categories'));
     }
 
     /**

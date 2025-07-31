@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 
 /* Route::get('/', function () {
     return view('welcome');
@@ -22,5 +23,5 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/', [ProductController::class,'index'])->name('menu');
+Route::get('/', [CategoryController::class,'index'])->name('menu');
 Route::get('/category/{category}',[ProductController::class,'byCategory']);

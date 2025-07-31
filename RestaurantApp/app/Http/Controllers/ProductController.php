@@ -13,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('menu.index');
+        $products = Product::latest()->take(10)->get();
+        return view('category.index', compact('products'));
     }
 
     /**
