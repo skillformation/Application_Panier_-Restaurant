@@ -14,4 +14,9 @@ class Cart_item extends Model
         'extras',
         'unit_price',
     ];
+
+    //Definir la casts pour les champsde type JSON
+    protected $casts = [
+        'extras' => 'array', 
+    ];
 }
