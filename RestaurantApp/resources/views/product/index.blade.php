@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Interface de commande de pizzas</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -145,88 +146,30 @@
             </div>
 
             <!-- Liste des articles commandés -->
-            <div class="flex-1 overflow-y-auto custom-scrollbar pr-2 -mr-2">
-                <!-- Article de commande 1 -->
-                <div class="flex items-center mb-4 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                    <img src="https://placehold.co/60x60/f0f0f0/666666?text=Jus" alt="Jus d'orange" class="w-16 h-16 rounded-lg object-cover mr-4">
-                    <div class="flex-1">
-                        <h4 class="font-semibold text-lg">Orange Juice</h4>
-                        <p class="text-gray-500 text-sm">Note: Less Ice</p>
-                        <p class="font-bold text-blue-600">$2,87</p>
-                    </div>
-                    <div class="flex items-center border border-gray-300 rounded-full">
-                        <button class="px-3 py-1 text-gray-600 font-bold hover:bg-gray-200 rounded-l-full">-</button>
-                        <span class="px-3">4</span>
-                        <button class="px-3 py-1 text-gray-600 font-bold hover:bg-gray-200 rounded-r-full">+</button>
-                    </div>
-                </div>
-
-                <!-- Article de commande 2 -->
-                <div class="flex items-center mb-4 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                    <img src="https://placehold.co/60x60/f0f0f0/666666?text=Pizza" alt="Pizza American Favorite" class="w-16 h-16 rounded-lg object-cover mr-4">
-                    <div class="flex-1">
-                        <h4 class="font-semibold text-lg">American Favorite</h4>
-                        <p class="text-gray-500 text-sm">Crust: Stuffed Crust Sosis</p>
-                        <p class="text-gray-500 text-sm">Extras: Extra Mozarella</p>
-                        <p class="font-bold text-blue-600">$4,87</p>
-                    </div>
-                    <div class="flex items-center border border-gray-300 rounded-full">
-                        <button class="px-3 py-1 text-gray-600 font-bold hover:bg-gray-200 rounded-l-full">-</button>
-                        <span class="px-3">1</span>
-                        <button class="px-3 py-1 text-gray-600 font-bold hover:bg-gray-200 rounded-r-full">+</button>
-                    </div>
-                </div>
-
-                <!-- Article de commande 3 -->
-                <div class="flex items-center mb-4 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                    <img src="https://placehold.co/60x60/f0f0f0/666666?text=Pizza" alt="Pizza Super Supreme" class="w-16 h-16 rounded-lg object-cover mr-4">
-                    <div class="flex-1">
-                        <h4 class="font-semibold text-lg">Super Supreme</h4>
-                        <p class="text-gray-500 text-sm">Crust: Stuffed Crust Cheese</p>
-                        <p class="font-bold text-blue-600">$5,75</p>
-                    </div>
-                    <div class="flex items-center border border-gray-300 rounded-full">
-                        <button class="px-3 py-1 text-gray-600 font-bold hover:bg-gray-200 rounded-l-full">-</button>
-                        <span class="px-3">1</span>
-                        <button class="px-3 py-1 text-gray-600 font-bold hover:bg-gray-200 rounded-r-full">+</button>
-                    </div>
-                </div>
-                
-                <!-- Article de commande 4 -->
-                <div class="flex items-center mb-4 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                    <img src="https://placehold.co/60x60/f0f0f0/666666?text=Pizza" alt="Pizza Favorite Cheese" class="w-16 h-16 rounded-lg object-cover mr-4">
-                    <div class="flex-1">
-                        <h4 class="font-semibold text-lg">Favorite Cheese</h4>
-                        <p class="text-gray-500 text-sm">Crust: Stuffed Crust Sosis</p>
-                        <p class="font-bold text-blue-600">$6,75</p>
-                    </div>
-                    <div class="flex items-center border border-gray-300 rounded-full">
-                        <button class="px-3 py-1 text-gray-600 font-bold hover:bg-gray-200 rounded-l-full">-</button>
-                        <span class="px-3">1</span>
-                        <button class="px-3 py-1 text-gray-600 font-bold hover:bg-gray-200 rounded-r-full">+</button>
-                    </div>
-                </div>
-
+            <div id="cart-items" class="flex-1 overflow-y-auto custom-scrollbar pr-2 -mr-2">
+                <!-- Les articles du panier seront injectés ici par JavaScript -->
+                <p class="text-center text-gray-500">Votre panier est vide.</p>
             </div>
 
             <!-- Totaux et bouton d'impression -->
             <div class="mt-4 pt-4 border-t border-gray-200">
                 <div class="flex justify-between items-center mb-2">
-                    <span class="text-gray-600">Items(7)</span>
-                    <span class="font-bold">$28,67</span>
+                    <span class="text-gray-600" id="cart-item-count">Articles (0)</span>
+                    <span class="font-bold" id="cart-subtotal">0,00 €</span>
                 </div>
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-gray-600">Tax(10%)</span>
-                    <span class="font-bold">$2,86</span>
+                    <span class="font-bold" id="cart-tax">0,00 €</span>
                 </div>
                 <div class="flex justify-between items-center text-xl font-bold mb-6">
                     <span>Total</span>
-                    <span>$31,53</span>
+                    <span id="cart-total">0,00 €</span>
                 </div>
                 <button class="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 button-animation">Print Bills</button>
             </div>
         </div>
     </div>
 
+    <script src="{{ asset('js/cart.js') }}"></script>
 </body>
 </html>
