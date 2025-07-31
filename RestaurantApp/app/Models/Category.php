@@ -5,9 +5,12 @@ namespace App\Models;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Categorie extends Model
+class Category extends Model
 {
+    //utiliser le trait HasFactory pour les factories
+    use HasFactory;
     //Definir le fillable pour la mass assignement
     protected $fillable = [
         'name',

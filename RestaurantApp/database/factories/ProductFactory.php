@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +22,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 1, 1000),
             'image' => $this->faker->optional()->imageUrl(640, 480, 'products'),
             'description' => $this->faker->paragraphs(3, true),
-            'category_id' => \App\Models\Category::factory(),
+            'category_id' => Category::factory(),
             'is_active' => $this->faker->boolean(90), // 90% de chance d'être actif
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
