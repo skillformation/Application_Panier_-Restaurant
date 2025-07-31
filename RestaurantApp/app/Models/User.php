@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // Ajout du champ role pour la gestion des rôles
     ];
 
     /**
