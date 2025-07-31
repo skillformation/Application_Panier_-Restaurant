@@ -19,5 +19,16 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+         // Créer 5 catégories
+        Category::factory(5)->create();
+        Product::factory(10)->create();
+        //Pour chaque catégorie créer entre 5 et 20 produits
+        Category::all()->each(function ($category) {
+            $productsCount = rand(5, 20);
+            Product::factory($productsCount)->create([
+                'category_id' => $category->id,
+            ]);
+        });
     }
 }
