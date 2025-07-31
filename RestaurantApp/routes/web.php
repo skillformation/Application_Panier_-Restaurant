@@ -23,5 +23,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/', [CategoryController::class,'index'])->name('menu');
+Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/category', [CategoryController::class,'index'])->name('menu');
 Route::get('/category/{category}',[ProductController::class,'byCategory']);

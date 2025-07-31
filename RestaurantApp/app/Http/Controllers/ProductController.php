@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
 
@@ -13,8 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
         $products = Product::latest()->take(10)->get();
-        return view('category.index', compact('products'));
+        return view('product.index', compact('products','categories'));
     }
 
     /**
