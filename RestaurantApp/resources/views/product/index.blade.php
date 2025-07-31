@@ -108,15 +108,13 @@
                 </div>
             </div>
 
-            <!-- Catégories -->
+          <!-- Catégories -->
             <div class="flex space-x-3 sm:space-x-4 mb-6 overflow-x-auto pb-2 custom-scrollbar">
-                @foreach ($categories as $item)
-                    <button class="flex items-center px-4 py-2 bg-blue-500 text-white rounded-xl shadow-md flex-shrink-0 button-animation">
-                        <img src="https://placehold.co/20x20/ffffff/000000?text=P" alt="Icône Pizza" class="w-5 h-5 mr-2 opacity-0">
-                        {{ $item->name }}
-                    </button>
-                @endforeach
-             
+                @forelse ($categories as $item)
+                    <x-category-nav :categories="$item" />
+                @empty
+                    Pas de catégories disponibles
+                @endforelse
                 
             </div>
 
@@ -131,15 +129,10 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-y-auto custom-scrollbar pr-2 flex-1">
 
                 @forelse ($products as $item)
-                    <div class="bg-white rounded-2xl shadow-md p-4 flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200 cursor-pointer">
-                     <x-product-card :product="$item" />
-                    </div>
+                    <x-product-card :product="$item" />
                 @empty
-                    Pas de produit.
+                    <p>Pas de produit.</p>
                 @endforelse
-              
-                
-                
             </div>
         </div>
 

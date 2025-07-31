@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Category;
-use App\Models\Categorie;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +24,8 @@ class Product extends Model
 
     //Definir la cast pour l'image
     protected $casts = [
-        'image' => 'array',
+        // 'array' est inhabituel pour une image, 'string' pour un chemin est plus courant.
+        'image' => 'string',
     ];
 
     //Relation avec la categorie
