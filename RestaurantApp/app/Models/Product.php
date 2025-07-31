@@ -18,4 +18,9 @@ class Product extends Model
         'is_active',
     ];
 
+    //Definir la cast pour l'image
+    protected $casts = [
+        'image' => 'array',
+    ];
+
 }

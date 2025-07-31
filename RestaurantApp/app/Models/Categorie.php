@@ -11,4 +11,9 @@ class Categorie extends Model
         'name',
         'icon',
     ];
+
+    //Definir la cast pour l'icon
+    protected $casts = [
+        'icon' => 'array',
+    ];
 }
